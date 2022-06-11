@@ -1,0 +1,42 @@
+﻿@model List<Cart>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Product.Name</td>
+            <td>
+                <form asp-controller="Home" asp-action="QuantityUpdate" method="post">
+                    <input type="hidden" name="cartId" value="@item.CartId" />
+                    <input type="hidden" name="productId" value="@item.ProductId" />
+                    <input type="number" name="quantity" value="@item.Quantity" min="1" class="w-25" />
+                    <button type="submit" class="btn btn-sm btn-primary mr-1">Update</button>
+                </form>
+            </td>
+            <td>@(item.Quantity*item.Product.Price)</td>
+            <td>
+                <form asp-controller="Home" asp-action="DeleteCartItem" method="post" class="d-inline">
+                    <input type="hidden" name="cartId" value="@item.CartId" />
+                    <button type="submit" class="btn btn-sm btn-primary mr-1">Delete</button>
+                </form>
+            </td>
+        </tr>
+        }
+        <tr class="table-primary font-weight-bold">
+            <td colspan="2">
+                Genel Toplam
+            </td>
+            <td>@ViewBag.TotalPrice</td>
+        </tr>
+    </tbody>
+</table>

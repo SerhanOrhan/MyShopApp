@@ -1,0 +1,21 @@
+﻿@model Product
+<div class="card mb-2">
+    <div class="card-body">
+        <h5 class="card-title text-center">@Model.Name</h5>
+        <small class="text-muted">
+            <i class="fa-solid fa-turkish-lira-sign"></i>Price: @Model.Price
+        </small>
+        <div>
+            <label>@Model.Description</label>
+        </div>
+        <div class="card-footer bg-white text-center d-flex justify-content-around p-1">
+
+            <form asp-controller="Home" asp-action="AddCart" method="post">
+                <input type="hidden" name="productId" value="@Model.ProductId" />
+                <input type="number" name="quantity" value="1" min="1" />
+                <input type="hidden" name="price" value="@Model.Price"/>
+                <button class="btn btn-sm btn-success" type="submit">Add to Card</button>
+            </form>
+        </div>
+    </div>
+</div>
