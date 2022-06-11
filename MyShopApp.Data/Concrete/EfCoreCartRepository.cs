@@ -20,6 +20,14 @@ namespace MyShopApp.Data.Concrete
             }
         }
 
+        public Cart GetProductMatch(int productId)
+        {
+            using (var context = new MyShopContext())
+            {
+                return context.Carts.Where(i => i.ProductId == productId).FirstOrDefault();
+            }
+        }
+
         public Cart GetByWithProduct(int cartId)
         {
             using (var context=new MyShopContext())

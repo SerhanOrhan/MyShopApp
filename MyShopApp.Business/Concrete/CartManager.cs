@@ -43,6 +43,10 @@ namespace MyShopApp.Business.Concrete
             return _cartRepository.GetByWithProduct(cart);
         }
 
+        public Cart GetProductMatch(int productId)
+        {
+            return _cartRepository.GetProductMatch(productId);
+        }
 
         public Cart GeyById(int id)
         {

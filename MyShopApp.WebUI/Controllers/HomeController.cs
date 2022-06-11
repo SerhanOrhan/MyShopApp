@@ -29,13 +29,17 @@ namespace MyShopApp.WebUI.Controllers
         [HttpPost]
         public IActionResult AddCart(int productId, int quantity, int price)
         {
-            Cart cart = new Cart()
+            var findProduct = _cartService.GetProductMatch(productId);
+            if (findProduct==null)
             {
-                ProductId = productId,
-                Quantity = quantity,
-                TotalPrice = (double)quantity * price
-            };
-            _cartService.Create(cart);
+                this.AddCardItem(productId, quantity,price);
+            }
+            else
+            {
+                findProduct.Quantity += quantity;
+                findProduct.TotalPrice = (double)findProduct.Quantity * price;
+                _cartService.Update(findProduct);
+            }
             return RedirectToAction("Cart");
         }
         public IActionResult Cart()
@@ -79,6 +83,15 @@ namespace MyShopApp.WebUI.Controllers
             _cartService.Update(cart);
             return RedirectToAction("Cart");
         }
-
+        private void AddCardItem(int productId, int quantity, int price)
+        {
+            Cart cart = new Cart()
+            {
+                ProductId = productId,
+                Quantity = quantity,
+                TotalPrice = (double)quantity * price
+            };
+            _cartService.Create(cart);
+        }
     }
 }

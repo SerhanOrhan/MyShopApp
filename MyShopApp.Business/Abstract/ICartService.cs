@@ -16,6 +16,8 @@ namespace MyShopApp.Business.Abstract
         void Delete(Cart entity);
         List<Cart> GetAllWithProduct();
         Cart GetByWithProduct(int cart);
+        Cart GetProductMatch(int productId);
+
 
     }
 }
