@@ -75,11 +75,6 @@ namespace MyShopApp.WebUI.Controllers
             var product = _cartService.GetByWithProduct(productId);
             cart.Quantity = quantity;
             cart.TotalPrice = (double)product.Product.Price * quantity;
-            //Cart model = new Cart()
-            //{
-            //    CartId=entityId
-            //    Quantity = quantity
-            //};
             _cartService.Update(cart);
             return RedirectToAction("Cart");
         }

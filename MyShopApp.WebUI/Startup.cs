@@ -60,11 +60,6 @@ namespace MyShopApp.WebUI
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute(
-                // name: "homeproductdelete",
-                // pattern: "admin/products/{id?}",
-                // defaults: new { controller = "Home", action = "DeleteCartItem" }
-                // );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
